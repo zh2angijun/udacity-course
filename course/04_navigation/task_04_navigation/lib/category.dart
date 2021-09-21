@@ -21,10 +21,10 @@ final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 /// The widget is composed on an [Icon] and [Text]. Tapping on the widget shows
 /// a colored [InkWell] animation.
 class Category extends StatelessWidget {
-  final String name;
-  final ColorSwatch color;
-  final IconData iconLocation;
-  final List<Unit> units;
+  final String? name;
+  final ColorSwatch? color;
+  final IconData? iconLocation;
+  final List<Unit>? units;
 
   /// Creates a [Category].
   ///
@@ -91,7 +91,7 @@ class Category extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    name,
+                    name!,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline,
                   ),
