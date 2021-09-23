@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 
 // TODO: Check if we need to import anything
