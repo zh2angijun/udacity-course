@@ -181,7 +181,7 @@ class _UnitConverterState extends State<UnitConverter> {
         children: [
           // This is the widget that accepts text input. In this case, it
           // accepts numbers and calls the onChanged property on update.
-          // You can read more about it here: https://flutter.io/text-input
+          // You can read more about it here: https://flutter.dev/text-input
           TextField(
             style: Theme.of(context).textTheme.headline4,
             decoration: InputDecoration(

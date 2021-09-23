@@ -38,7 +38,7 @@ class CategoryTile extends StatelessWidget {
   // This `context` parameter describes the location of this widget in the
   // widget tree. It can be used for obtaining Theme data from the nearest
   // Theme ancestor in the tree. Below, we obtain the display1 text theme.
-  // See https://docs.flutter.io/flutter/material/Theme-class.html
+  // See https://api.flutter.dev/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,

@@ -4,7 +4,7 @@
 
 // ignore_for_file: unused_element
 
-// You can read about packages here: https://flutter.io/using-packages/
+// You can read about packages here: https://flutter.dev/using-packages/
 import 'package:flutter/material.dart';
 
 // You can use a relative import, i.e. `import 'category.dart';` or

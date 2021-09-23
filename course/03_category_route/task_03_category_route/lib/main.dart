@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// You can read about packages here: https://flutter.io/using-packages/
+// You can read about packages here: https://flutter.dev/using-packages/
 import 'package:flutter/material.dart';
 
 // TODO: Import the CategoryRoute widget

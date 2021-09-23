@@ -23,7 +23,7 @@ const apiCategory = {
 ///   GET /currency: get a list of currencies
 ///   GET /currency/convert: get conversion from one currency amount to another
 class Api {
-  /// We use the `dart:io` HttpClient. More details: https://flutter.io/networking/
+  /// We use the `dart:io` HttpClient. More details: https://flutter.dev/networking/
   // We specify the type here for readability. Since we're defining a final
   // field, the type is determined at initialization.
   final HttpClient _httpClient = HttpClient();
