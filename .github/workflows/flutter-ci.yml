@@ -32,4 +32,4 @@ jobs:
           channel: ${{ matrix.flutter_version }}
       - run: dart --version
       - run: flutter --version
-      - run: for dir in `find . -name pubspec.yaml -exec dirname {} \; |sort -n`; do ; pushd $dir && dart format -o none --set-exit-if-changed . && dart analyze --fatal-infos ; popd; done
+      - run: for dir in `find . -name pubspec.yaml -exec dirname {} \; |sort -n`; do (cd $dir && echo $dir && dart format -o none --set-exit-if-changed . && dart analyze --fatal-infos); done
