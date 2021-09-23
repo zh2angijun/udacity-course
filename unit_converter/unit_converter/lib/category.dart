@@ -5,7 +5,6 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import 'package:unit_converter/unit.dart';
 
@@ -22,12 +21,9 @@ class Category {
   /// its color for the UI, units for conversions (e.g. 'Millimeter', 'Meter'),
   /// and the icon that represents it (e.g. a ruler).
   const Category({
-    @required this.name,
-    @required this.color,
-    @required this.units,
-    @required this.iconLocation,
-  })  : assert(name != null),
-        assert(color != null),
-        assert(units != null),
-        assert(iconLocation != null);
+    required this.name,
+    required this.color,
+    required this.units,
+    required this.iconLocation,
+  });
 }

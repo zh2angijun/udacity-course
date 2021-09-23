@@ -39,7 +39,7 @@ class Api {
   /// retrieve units. We pass this into the query parameter in the API call.
   ///
   /// Returns a list. Returns null on error.
-  Future<List> getUnits(String category) async {
+  Future<List?> getUnits(String? category) async {
     final uri = Uri.https(_url, '/$category');
     final jsonResponse = await _getJson(uri);
     if (jsonResponse == null || jsonResponse['units'] == null) {
@@ -52,8 +52,8 @@ class Api {
   /// Given two units, converts from one to another.
   ///
   /// Returns a double, which is the converted amount. Returns null on error.
-  Future<double> convert(
-      String category, String amount, String fromUnit, String toUnit) async {
+  Future<double?> convert(
+      String? category, String amount, String? fromUnit, String? toUnit) async {
     final uri = Uri.https(_url, '/$category/convert',
         {'amount': amount, 'from': fromUnit, 'to': toUnit});
     final jsonResponse = await _getJson(uri);
@@ -70,11 +70,11 @@ class Api {
   /// Fetches and decodes a JSON object represented as a Dart [Map].
   ///
   /// Returns null if the API server is down, or the response is not JSON.
-  Future<Map<String, dynamic>> _getJson(Uri uri) async {
+  Future<Map<String, dynamic>?> _getJson(Uri uri) async {
     try {
       final httpRequest = await _httpClient.getUrl(uri);
       final httpResponse = await httpRequest.close();
-      if (httpResponse.statusCode != HttpStatus.OK) {
+      if (httpResponse.statusCode != HttpStatus.ok) {
         return null;
       }
       // The response is sent as a Stream of bytes that we need to convert to a

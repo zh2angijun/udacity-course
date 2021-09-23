@@ -11,15 +11,17 @@ void main() {
       title: 'Hello Rectangle',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Hello Rectangle'),
+          title: const Text('Hello Rectangle'),
         ),
-        body: HelloRectangle(),
+        body: const HelloRectangle(),
       ),
     ),
   );
 }
 
 class HelloRectangle extends StatelessWidget {
+  const HelloRectangle({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -27,7 +29,7 @@ class HelloRectangle extends StatelessWidget {
         color: Colors.greenAccent,
         height: 400.0,
         width: 300.0,
-        child: Center(
+        child: const Center(
           child: Text(
             'Hello!',
             style: TextStyle(fontSize: 40.0),

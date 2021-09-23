@@ -13,7 +13,6 @@
 ///   GET /currency: get a list of currencies
 ///   GET /currency/convert: get conversion from one currency amount to another
 class Api {
-
   // TODO: Add any relevant variables and helper functions
 
   // TODO: Create getUnits()

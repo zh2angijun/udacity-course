@@ -12,7 +12,7 @@ import 'package:unit_converter/category_route.dart';
 
 /// The function that is called when main.dart is run.
 void main() {
-  runApp(UnitConverterApp());
+  runApp(const UnitConverterApp());
 }
 
 /// This widget is the root of our application.
@@ -20,6 +20,8 @@ void main() {
 /// The first screen we see is a list [Categories], each of which
 /// has a list of [Unit]s.
 class UnitConverterApp extends StatelessWidget {
+  const UnitConverterApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,9 +35,10 @@ class UnitConverterApp extends StatelessWidget {
             ),
         // This colors the [InputOutlineBorder] when it is selected
         primaryColor: Colors.grey[500],
-        textSelectionHandleColor: Colors.green[500],
+        textSelectionTheme:
+            TextSelectionThemeData(selectionHandleColor: Colors.green[500]),
       ),
-      home: CategoryRoute(),
+      home: const CategoryRoute(),
     );
   }
 }

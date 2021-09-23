@@ -3,10 +3,9 @@
 // found in the LICENSE file.
 
 // TODO: Import necessary packages
-import 'dart:async';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import 'category.dart';
 import 'unit.dart';
@@ -21,19 +20,20 @@ class UnitConverter extends StatefulWidget {
 
   /// This [UnitConverter] takes in a [Category] with [Units]. It can't be null.
   const UnitConverter({
-    @required this.category,
-  }) : assert(category != null);
+    required this.category,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _UnitConverterState createState() => _UnitConverterState();
 }
 
 class _UnitConverterState extends State<UnitConverter> {
-  Unit _fromValue;
-  Unit _toValue;
-  double _inputValue;
+  Unit? _fromValue;
+  Unit? _toValue;
+  double? _inputValue;
   String _convertedValue = '';
-  List<DropdownMenuItem> _unitMenuItems;
+  List<DropdownMenuItem>? _unitMenuItems;
   bool _showValidationError = false;
   final _inputKey = GlobalKey(debugLabel: 'inputText');
 
@@ -60,11 +60,9 @@ class _UnitConverterState extends State<UnitConverter> {
     for (var unit in widget.category.units) {
       newItems.add(DropdownMenuItem(
         value: unit.name,
-        child: Container(
-          child: Text(
-            unit.name,
-            softWrap: true,
-          ),
+        child: Text(
+          unit.name!,
+          softWrap: true,
         ),
       ));
     }
@@ -105,14 +103,14 @@ class _UnitConverterState extends State<UnitConverter> {
   // Remember, the API call is an async function.
   void _updateConversion() {
     setState(() {
-      _convertedValue =
-          _format(_inputValue * (_toValue.conversion / _fromValue.conversion));
+      _convertedValue = _format(
+          _inputValue! * (_toValue!.conversion! / _fromValue!.conversion!));
     });
   }
 
   void _updateInputValue(String input) {
     setState(() {
-      if (input == null || input.isEmpty) {
+      if (input.isEmpty) {
         _convertedValue = '';
       } else {
         // Even though we are using the numerical keyboard, we still have to check
@@ -130,12 +128,11 @@ class _UnitConverterState extends State<UnitConverter> {
     });
   }
 
-  Unit _getUnit(String unitName) {
-    return widget.category.units.firstWhere(
+  Unit? _getUnit(String? unitName) {
+    return widget.category.units.firstWhereOrNull(
       (Unit unit) {
         return unit.name == unitName;
       },
-      orElse: null,
     );
   }
 
@@ -157,23 +154,24 @@ class _UnitConverterState extends State<UnitConverter> {
     }
   }
 
-  Widget _createDropdown(String currentValue, ValueChanged<dynamic> onChanged) {
+  Widget _createDropdown(
+      String? currentValue, ValueChanged<dynamic> onChanged) {
     return Container(
-      margin: EdgeInsets.only(top: 16.0),
+      margin: const EdgeInsets.only(top: 16.0),
       decoration: BoxDecoration(
         // This sets the color of the [DropdownButton] itself
         color: Colors.grey[50],
         border: Border.all(
-          color: Colors.grey[400],
+          color: Colors.grey[400]!,
           width: 1.0,
         ),
       ),
-      padding: EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Theme(
         // This sets the color of the [DropdownMenuItem]
         data: Theme.of(context).copyWith(
-              canvasColor: Colors.grey[50],
-            ),
+          canvasColor: Colors.grey[50],
+        ),
         child: DropdownButtonHideUnderline(
           child: ButtonTheme(
             alignedDropdown: true,
@@ -181,7 +179,7 @@ class _UnitConverterState extends State<UnitConverter> {
               value: currentValue,
               items: _unitMenuItems,
               onChanged: onChanged,
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
         ),
@@ -201,9 +199,9 @@ class _UnitConverterState extends State<UnitConverter> {
           // You can read more about it here: https://flutter.io/text-input
           TextField(
             key: _inputKey,
-            style: Theme.of(context).textTheme.display1,
+            style: Theme.of(context).textTheme.headline4,
             decoration: InputDecoration(
-              labelStyle: Theme.of(context).textTheme.display1,
+              labelStyle: Theme.of(context).textTheme.headline4,
               errorText: _showValidationError ? 'Invalid number entered' : null,
               labelText: 'Input',
               border: OutlineInputBorder(
@@ -215,12 +213,12 @@ class _UnitConverterState extends State<UnitConverter> {
             keyboardType: TextInputType.number,
             onChanged: _updateInputValue,
           ),
-          _createDropdown(_fromValue.name, _updateFromConversion),
+          _createDropdown(_fromValue!.name, _updateFromConversion),
         ],
       ),
     );
 
-    final arrows = RotatedBox(
+    const arrows = RotatedBox(
       quarterTurns: 1,
       child: Icon(
         Icons.compare_arrows,
@@ -236,17 +234,17 @@ class _UnitConverterState extends State<UnitConverter> {
           InputDecorator(
             child: Text(
               _convertedValue,
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
             decoration: InputDecoration(
               labelText: 'Output',
-              labelStyle: Theme.of(context).textTheme.display1,
+              labelStyle: Theme.of(context).textTheme.headline4,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(0.0),
               ),
             ),
           ),
-          _createDropdown(_toValue.name, _updateToConversion),
+          _createDropdown(_toValue!.name, _updateToConversion),
         ],
       ),
     );
@@ -269,7 +267,7 @@ class _UnitConverterState extends State<UnitConverter> {
             return converter;
           } else {
             return Center(
-              child: Container(
+              child: SizedBox(
                 width: 450.0,
                 child: converter,
               ),

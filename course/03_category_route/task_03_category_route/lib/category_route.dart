@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatelessWidget {
-  const CategoryRoute();
+  const CategoryRoute({Key? key}) : super(key: key);
 
   static const _categoryNames = <String>[
     'Length',

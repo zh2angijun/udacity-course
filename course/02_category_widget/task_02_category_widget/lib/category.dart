@@ -16,7 +16,7 @@ class Category extends StatelessWidget {
   /// A [Category] saves the name of the Category (e.g. 'Length'), its color for
   /// the UI, and the icon that represents it (e.g. a ruler).
   // TODO: You'll need the name, color, and iconLocation from main.dart
-  const Category();
+  const Category({Key? key}) : super(key: key);
 
   /// Builds a custom widget that shows [Category] information.
   ///

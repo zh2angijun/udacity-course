@@ -18,15 +18,15 @@ import 'unit_converter.dart';
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatefulWidget {
-  const CategoryRoute();
+  const CategoryRoute({Key? key}) : super(key: key);
 
   @override
   _CategoryRouteState createState() => _CategoryRouteState();
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
-  Category _defaultCategory;
-  Category _currentCategory;
+  Category? _defaultCategory;
+  Category? _currentCategory;
   // Widgets are supposed to be deeply immutable objects. We can update and edit
   // _categories as we build our app, and when we pass it into a widget's
   // `children` property, we call .toList() on it.
@@ -148,7 +148,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // You can also use MediaQuery.of(context).size to calculate the orientation
     assert(debugCheckHasMediaQuery(context));
     final listView = Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: 8.0,
         right: 8.0,
         bottom: 48.0,
@@ -157,14 +157,13 @@ class _CategoryRouteState extends State<CategoryRoute> {
     );
 
     return Backdrop(
-      currentCategory:
-          _currentCategory == null ? _defaultCategory : _currentCategory,
+      currentCategory: _currentCategory ?? _defaultCategory!,
       frontPanel: _currentCategory == null
-          ? UnitConverter(category: _defaultCategory)
-          : UnitConverter(category: _currentCategory),
+          ? UnitConverter(category: _defaultCategory!)
+          : UnitConverter(category: _currentCategory!),
       backPanel: listView,
-      frontTitle: Text('Unit Converter'),
-      backTitle: Text('Select a Category'),
+      frontTitle: const Text('Unit Converter'),
+      backTitle: const Text('Select a Category'),
     );
   }
 }

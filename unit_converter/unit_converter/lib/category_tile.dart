@@ -5,7 +5,6 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import 'package:unit_converter/category.dart';
 
@@ -17,18 +16,17 @@ final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 /// A [CategoryTile] to display a [Category].
 class CategoryTile extends StatelessWidget {
   final Category category;
-  final ValueChanged<Category> onTap;
+  final ValueChanged<Category>? onTap;
 
   /// The [CategoryTile] shows the name and color of a [Category] for unit
   /// conversions.
   ///
   /// Tapping on it brings you to the unit converter.
   const CategoryTile({
-    Key key,
-    @required this.category,
+    Key? key,
+    required this.category,
     this.onTap,
-  })  : assert(category != null),
-        super(key: key);
+  }) : super(key: key);
 
   /// Builds a custom widget that shows [Category] information.
   ///
@@ -40,9 +38,10 @@ class CategoryTile extends StatelessWidget {
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     return Material(
-      color:
-          onTap == null ? Color.fromRGBO(50, 50, 50, 0.2) : Colors.transparent,
-      child: Container(
+      color: onTap == null
+          ? const Color.fromRGBO(50, 50, 50, 0.2)
+          : Colors.transparent,
+      child: SizedBox(
         height: _rowHeight,
         child: InkWell(
           borderRadius: _borderRadius,
@@ -50,9 +49,9 @@ class CategoryTile extends StatelessWidget {
           splashColor: category.color['splash'],
           // We can use either the () => function() or the () { function(); }
           // syntax.
-          onTap: onTap == null ? null : () => onTap(category),
+          onTap: onTap == null ? null : () => onTap!(category),
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               // There are two ways to denote a list: `[]` and `List()`.
@@ -61,14 +60,14 @@ class CategoryTile extends StatelessWidget {
               // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
               children: [
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Image.asset(category.iconLocation),
                 ),
                 Center(
                   child: Text(
                     category.name,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline,
+                    style: Theme.of(context).textTheme.headline5,
                   ),
                 ),
               ],

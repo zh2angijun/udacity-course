@@ -17,12 +17,14 @@ const _categoryColor = Colors.green;
 
 /// The function that is called when main.dart is run.
 void main() {
-  runApp(UnitConverterApp());
+  runApp(const UnitConverterApp());
 }
 
 /// This widget is the root of our application.
 /// Currently, we just show one widget in our app.
 class UnitConverterApp extends StatelessWidget {
+  const UnitConverterApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +32,7 @@ class UnitConverterApp extends StatelessWidget {
       title: 'Unit Converter',
       home: Scaffold(
         backgroundColor: Colors.green[100],
-        body: Center(
+        body: const Center(
           // TODO: Determine what properties you'll need to pass into the widget
           child: Category(),
         ),

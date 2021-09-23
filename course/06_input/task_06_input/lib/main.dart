@@ -12,7 +12,7 @@ import 'category_route.dart';
 
 /// The function that is called when main.dart is run.
 void main() {
-  runApp(UnitConverterApp());
+  runApp(const UnitConverterApp());
 }
 
 /// This widget is the root of our application.
@@ -20,9 +20,11 @@ void main() {
 /// The first screen we see is a list [Categories], each of which
 /// has a list of [Unit]s.
 class UnitConverterApp extends StatelessWidget {
+  const UnitConverterApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
       // TODO: Fill out the theme parameter

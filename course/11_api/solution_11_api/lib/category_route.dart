@@ -23,15 +23,15 @@ import 'unit_converter.dart';
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatefulWidget {
-  const CategoryRoute();
+  const CategoryRoute({Key? key}) : super(key: key);
 
   @override
   _CategoryRouteState createState() => _CategoryRouteState();
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
-  Category _defaultCategory;
-  Category _currentCategory;
+  Category? _defaultCategory;
+  Category? _currentCategory;
   // Widgets are supposed to be deeply immutable objects. We can update and edit
   // _categories as we build our app, and when we pass it into a widget's
   // `children` property, we call .toList() on it.
@@ -100,15 +100,14 @@ class _CategoryRouteState extends State<CategoryRoute> {
   Future<void> _retrieveLocalCategories() async {
     // Consider omitting the types for local variables. For more details on Effective
     // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
-    final json = DefaultAssetBundle
-        .of(context)
+    final json = DefaultAssetBundle.of(context)
         .loadString('assets/data/regular_units.json');
-    final data = JsonDecoder().convert(await json);
+    final data = const JsonDecoder().convert(await json);
     if (data is! Map) {
       throw ('Data retrieved from API is not a Map');
     }
     var categoryIndex = 0;
-    data.keys.forEach((key) {
+    for (var key in data.keys) {
       final List<Unit> units =
           data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
 
@@ -125,7 +124,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         _categories.add(category);
       });
       categoryIndex += 1;
-    });
+    }
   }
 
   /// Retrieves a [Category] and its [Unit]s from an API on the web
@@ -133,7 +132,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // Add a placeholder while we fetch the Currency category using the API
     setState(() {
       _categories.add(Category(
-        name: apiCategory['name'],
+        name: apiCategory['name']!,
         units: [],
         color: _baseColors.last,
         iconLocation: _icons.last,
@@ -151,7 +150,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
       setState(() {
         _categories.removeLast();
         _categories.add(Category(
-          name: apiCategory['name'],
+          name: apiCategory['name']!,
           units: units,
           color: _baseColors.last,
           iconLocation: _icons.last,
@@ -199,8 +198,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
   @override
   Widget build(BuildContext context) {
     if (_categories.isEmpty) {
-      return Center(
-        child: Container(
+      return const Center(
+        child: SizedBox(
           height: 180.0,
           width: 180.0,
           child: CircularProgressIndicator(),
@@ -212,7 +211,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // You can also use MediaQuery.of(context).size to calculate the orientation
     assert(debugCheckHasMediaQuery(context));
     final listView = Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: 8.0,
         right: 8.0,
         bottom: 48.0,
@@ -220,14 +219,13 @@ class _CategoryRouteState extends State<CategoryRoute> {
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
     return Backdrop(
-      currentCategory:
-          _currentCategory == null ? _defaultCategory : _currentCategory,
+      currentCategory: _currentCategory ?? _defaultCategory!,
       frontPanel: _currentCategory == null
-          ? UnitConverter(category: _defaultCategory)
-          : UnitConverter(category: _currentCategory),
+          ? UnitConverter(category: _defaultCategory!)
+          : UnitConverter(category: _currentCategory!),
       backPanel: listView,
-      frontTitle: Text('Unit Converter'),
-      backTitle: Text('Select a Category'),
+      frontTitle: const Text('Unit Converter'),
+      backTitle: const Text('Select a Category'),
     );
   }
 }

@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import 'package:task_04_navigation/unit.dart';
 
@@ -20,8 +19,9 @@ class ConverterRoute extends StatelessWidget {
   /// This [ConverterRoute] requires the color and units to not be null.
   // TODO: Pass in the [Category]'s color
   const ConverterRoute({
-    @required this.units,
-  }) : assert(units != null);
+    required this.units,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +29,17 @@ class ConverterRoute extends StatelessWidget {
     final unitWidgets = units.map((Unit unit) {
       // TODO: Set the color for this Container
       return Container(
-        margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             Text(
-              unit.name,
-              style: Theme.of(context).textTheme.headline,
+              unit.name!,
+              style: Theme.of(context).textTheme.headline5,
             ),
             Text(
               'Conversion: ${unit.conversion}',
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ],
         ),

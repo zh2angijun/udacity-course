@@ -5,7 +5,6 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import 'category.dart';
 
@@ -24,12 +23,10 @@ class CategoryTile extends StatelessWidget {
   ///
   /// Tapping on it brings you to the unit converter.
   const CategoryTile({
-    Key key,
-    @required this.category,
-    @required this.onTap,
-  })  : assert(category != null),
-        assert(onTap != null),
-        super(key: key);
+    Key? key,
+    required this.category,
+    required this.onTap,
+  }) : super(key: key);
 
   /// Builds a custom widget that shows [Category] information.
   ///
@@ -42,7 +39,7 @@ class CategoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      child: Container(
+      child: SizedBox(
         height: _rowHeight,
         child: InkWell(
           borderRadius: _borderRadius,
@@ -52,7 +49,7 @@ class CategoryTile extends StatelessWidget {
           // syntax.
           onTap: () => onTap(category),
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               // There are two ways to denote a list: `[]` and `List()`.
@@ -61,7 +58,7 @@ class CategoryTile extends StatelessWidget {
               // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
               children: [
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Icon(
                     category.iconLocation,
                     size: 60.0,
@@ -71,7 +68,7 @@ class CategoryTile extends StatelessWidget {
                   child: Text(
                     category.name,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline,
+                    style: Theme.of(context).textTheme.headline5,
                   ),
                 ),
               ],
