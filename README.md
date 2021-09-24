@@ -1,6 +1,9 @@
 # [Build Native Mobile Apps with Flutter](https://www.udacity.com/course/ud905)
 
-This repo contains everything you need for [Build Native Mobile Apps with Flutter, by Google and Udacity](https://www.udacity.com/course/ud905). The Unit Converter app has been broken down into sub-projects. To get started, [set up your development environment](https://flutter.io/setup) and clone this repo, using `git clone git@github.com:flutter/udacity-course.git` or `git clone https://github.com/flutter/udacity-course.git`.
+## _This repo has been archived and is no longer maintained_
+
+This repo contains code for [Build Native Mobile Apps with Flutter, by Google and Udacity](https://www.udacity.com/course/ud905).
+It's no longer being maintained and may contain out of date references or use deprecated APIs.
 
 ## Building the Complete Unit Converter App
 ### Android Studio/IntelliJ
